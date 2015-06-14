@@ -16,7 +16,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        //self.tableView.registerClass(SwitchTableViewCell.self, forCellReuseIdentifier: "switchCell")
     }
 
     override func didReceiveMemoryWarning() {
@@ -29,9 +29,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell = self.tableView.dequeueReusableCellWithIdentifier("cell") as! UITableViewCell
+        var cell = self.tableView.dequeueReusableCellWithIdentifier("switchCell") as! SwitchTableViewCell
         
         cell.textLabel?.text = self.items[indexPath.row]
+        cell.toggle.on = true
         
         return cell
     }
