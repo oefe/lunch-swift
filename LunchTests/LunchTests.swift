@@ -21,10 +21,13 @@ class LunchTests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
-        // This is an example of a functional test case.
-        XCTAssert(true, "Pass")
-    }
+    func testEmpty() {
+        let order = Order()
+        
+        XCTAssertEqual(order.alreadyOrdered, false, "not ordered yet")
+        XCTAssertEqual(order.current, [false, false, false, false, false], "nothing ordered this week")
+        XCTAssertEqual(order.next, [false, false, false, false, false], "nothing ordered next week")
+     }
     
     func testPerformanceExample() {
         // This is an example of a performance test case.
