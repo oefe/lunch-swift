@@ -28,11 +28,14 @@
                                             <subviews>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="gYe-aN-R0f">
                                                     <rect key="frame" x="243" y="4" width="51" height="31"/>
+                                                    <connections>
+                                                        <action selector="valueChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="zz8-Dq-UlR"/>
+                                                    </connections>
                                                 </switch>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="toggle" destination="gYe-aN-R0f" id="ZmR-ou-cue"/>
+                                            <outlet property="toggle" destination="gYe-aN-R0f" id="T4u-5A-Tp8"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

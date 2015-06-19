@@ -42,6 +42,17 @@ class Order {
         ]
     }
     
+    func valueForWeekIndex(weekIndex: Int, dayIndex: Int) -> Bool {
+        switch weekIndex {
+        case 0:
+            return current[dayIndex]
+        case 1:
+            return next[dayIndex]
+        default:
+            return false
+        }
+    }
+    
     // Constants
     private static let oneDay = 24 * 60 * 60.0
     private static let oneWeek = 7 * oneDay
