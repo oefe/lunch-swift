@@ -53,11 +53,29 @@ class Order {
         }
     }
     
+    func weekLabel(week: Int) -> String {
+        let date = today.dateByAddingTimeInterval(Double(week) * Order.oneWeek)
+        let formatter = NSDateFormatter()
+        formatter.dateFormat = "'KW' w"
+        formatter.locale = Order.locale
+        return formatter.stringFromDate(date)
+    }
+    
+    func dayLabel(#week: Int, day: Int) -> String {
+        let monday = mondayBeforeOrAt(today)
+        let date = monday.dateByAddingTimeInterval(Double(week) * Order.oneWeek + Double(day) * Order.oneDay)
+        let formatter = NSDateFormatter()
+        formatter.dateFormat = "EEEE, d.M."
+        formatter.locale = Order.locale
+        return formatter.stringFromDate(date)
+    }
+    
     // Constants
     private static let oneDay = 24 * 60 * 60.0
     private static let oneWeek = 7 * oneDay
     private static let finalJsonKey = "final"
     private static let ordersJsonKey = "orders"
+    private static let locale = NSLocale(localeIdentifier: "de")
     
     // Helper functions
     private func jsonKey(weeksForward: Double) -> String{
@@ -65,5 +83,13 @@ class Order {
         let formatter = NSDateFormatter()
         formatter.dateFormat = "YYYY-ww"
         return formatter.stringFromDate(date)
+    }
+    
+    private func mondayBeforeOrAt(date: NSDate) -> NSDate {
+        let formatter = NSDateFormatter()
+        formatter.dateFormat = "e"
+        formatter.locale = Order.locale
+        let dayNo = formatter.stringFromDate(date).toInt()!
+        return today.dateByAddingTimeInterval(-Order.oneDay * Double(dayNo - 1))
     }
 }

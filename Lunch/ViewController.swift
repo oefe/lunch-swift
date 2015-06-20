@@ -30,7 +30,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "Section \(section)"
+        return order.weekLabel(section)
     }
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -40,7 +40,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell = self.tableView.dequeueReusableCellWithIdentifier("switchCell") as! SwitchTableViewCell
         
-        cell.textLabel?.text = "Hello \(indexPath.section)-\(indexPath.row)"
+        cell.textLabel?.text = order.dayLabel(week: indexPath.section, day: indexPath.row)
         
         cell.toggle.on = order.valueForWeekIndex(indexPath.section, dayIndex: indexPath.row)
         cell.toggle.enabled = indexPath.section > 0 && !order.alreadyOrdered

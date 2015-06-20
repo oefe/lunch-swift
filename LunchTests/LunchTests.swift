@@ -84,6 +84,38 @@ class LunchTests: XCTestCase {
         XCTAssertEqual(new.next, [false, false, false, false, false], "nothing ordered next week")
     }
     
+    func testWeekLabel() {
+        let order = Order(today: date("17.06.2015"))
+        
+        XCTAssertEqual(order.weekLabel(0), "KW 25", "this week")
+        XCTAssertEqual(order.weekLabel(1), "KW 26", "next week")
+    }
+    
+    func testWeekLabelOnNewYearsEve() {
+        let order = Order(today: date("31.12.2015"))
+        
+        XCTAssertEqual(order.weekLabel(0), "KW 53", "this week")
+        XCTAssertEqual(order.weekLabel(1), "KW 1", "next week")
+    }
+    
+    func testDayLabel() {
+        let order = Order(today: date("17.06.2015"))
+        
+        XCTAssertEqual(order.dayLabel(week: 0, day: 0), "Montag, 15.6.", "this Monday")
+        XCTAssertEqual(order.dayLabel(week: 0, day: 4), "Freitag, 19.6.", "this Friday")
+        XCTAssertEqual(order.dayLabel(week: 1, day: 0), "Montag, 22.6.", "next Monday")
+        XCTAssertEqual(order.dayLabel(week: 1, day: 4), "Freitag, 26.6.", "next Friday")
+    }
+    
+    func testDayLabelOnNewYearsEve() {
+        let order = Order(today: date("31.12.2015"))
+        
+        XCTAssertEqual(order.dayLabel(week: 0, day: 0), "Montag, 28.12.", "this Monday")
+        XCTAssertEqual(order.dayLabel(week: 0, day: 4), "Freitag, 1.1.", "this Friday")
+        XCTAssertEqual(order.dayLabel(week: 1, day: 0), "Montag, 4.1.", "next Monday")
+        XCTAssertEqual(order.dayLabel(week: 1, day: 4), "Freitag, 8.1.", "next Friday")
+    }
+    
     func testPerformanceExample() {
         // This is an example of a performance test case.
         self.measureBlock() {
