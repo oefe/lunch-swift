@@ -82,6 +82,7 @@ class Order {
         let date = today.dateByAddingTimeInterval(weeksForward * Order.oneWeek)
         let formatter = NSDateFormatter()
         formatter.dateFormat = "YYYY-ww"
+        formatter.locale = Order.locale
         return formatter.stringFromDate(date)
     }
     
