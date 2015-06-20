@@ -30,6 +30,8 @@
 
 /* Begin PBXFileReference section */
 		5B7884241B2E0E4500B4358E /* SwitchTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitchTableViewCell.swift; sourceTree = "<group>"; };
+		5B7F94E41B36039700833189 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = SOURCE_ROOT; };
+		5B7F94E51B36039700833189 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		5BF112661B2DF3D8002CE228 /* Lunch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lunch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5BF1126A1B2DF3D8002CE228 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5BF1126B1B2DF3D8002CE228 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -61,11 +63,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5B7F94E61B3603C000833189 /* Documentation */ = {
+			isa = PBXGroup;
+			children = (
+				5B7F94E41B36039700833189 /* LICENSE */,
+				5B7F94E51B36039700833189 /* README.md */,
+			);
+			name = Documentation;
+			path = Lunch;
+			sourceTree = "<group>";
+		};
 		5BF1125D1B2DF3D8002CE228 = {
 			isa = PBXGroup;
 			children = (
 				5BF112681B2DF3D8002CE228 /* Lunch */,
 				5BF1127E1B2DF3D9002CE228 /* LunchTests */,
+				5B7F94E61B3603C000833189 /* Documentation */,
 				5BF112671B2DF3D8002CE228 /* Products */,
 			);
 			sourceTree = "<group>";
