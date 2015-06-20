@@ -70,6 +70,29 @@ class Order {
         return formatter.stringFromDate(date)
     }
     
+    func orderedDays() -> String {
+        let monday = mondayBeforeOrAt(today)
+        let formatter = NSDateFormatter()
+        formatter.dateFormat = "EEEE"
+        formatter.locale = Order.locale
+        
+        var days: [String] = []
+        for i in 0...4 {
+            if next[i] {
+                let date = monday.dateByAddingTimeInterval(Order.oneWeek + Double(i) * Order.oneDay)
+                days.append(formatter.stringFromDate(date))
+            }
+        }
+        switch days.count {
+        case 0:
+            return "nichts"
+        case 5:
+            return "jeden Tag"
+        default:
+            return ", ".join(days)
+        }
+    }
+    
     // Constants
     private static let oneDay = 24 * 60 * 60.0
     private static let oneWeek = 7 * oneDay

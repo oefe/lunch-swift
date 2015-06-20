@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import MessageUI
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, MFMailComposeViewControllerDelegate {
 
     @IBOutlet
     var tableView: UITableView!
@@ -63,6 +64,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     @IBAction
     func sendOrder(sender: UIButton) {
+        if !order.alreadyOrdered {
+            sendEmail()
+        }
         order.alreadyOrdered = !order.alreadyOrdered
         saveOrder()
         tableView.reloadData()
@@ -101,6 +105,24 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             label = "Abschicken"
         }
         sendButton.setTitle(label, forState: UIControlState.Normal)
+    }
+    
+    private func sendEmail() {
+        if !MFMailComposeViewController.canSendMail() {
+            println("Cannot send email, sorry!")
+            return
+        }
+        let mailer = MFMailComposeViewController()
+        mailer.mailComposeDelegate = self
+        mailer.setToRecipients(["example@example.com"])
+        mailer.setSubject("Essen \(order.weekLabel(0))")
+        let body = "Hallo Schatz,\n\nich habe nächste Woche \(order.orderedDays()) bestellt.\n\nciao\nMartina\n💕"
+        mailer.setMessageBody(body, isHTML: false)
+        presentViewController(mailer, animated: true, completion: nil)
+    }
+    
+    func mailComposeController(controller: MFMailComposeViewController!, didFinishWithResult result: MFMailComposeResult, error: NSError!) {
+        controller.dismissViewControllerAnimated(true, completion: nil)
     }
 }
 

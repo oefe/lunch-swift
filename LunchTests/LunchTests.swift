@@ -116,6 +116,26 @@ class LunchTests: XCTestCase {
         XCTAssertEqual(order.dayLabel(week: 1, day: 4), "Freitag, 8.1.", "next Friday")
     }
     
+    func testOrderedDaysNothing() {
+        let order = Order(today: date("17.06.2015"))
+
+        XCTAssertEqual(order.orderedDays(), "nichts", "special case wording")
+    }
+    
+    func testOrderedDaysEveryDay() {
+        let order = Order(today: date("17.06.2015"))
+        order.next = [true, true, true, true, true]
+        
+        XCTAssertEqual(order.orderedDays(), "jeden Tag", "special case wording")
+    }
+    
+    func testOrderedDaysSomeDays() {
+        let order = Order(today: date("17.06.2015"))
+        order.next = [true, false, false, true, true]
+        
+        XCTAssertEqual(order.orderedDays(), "Montag, Donnerstag, Freitag", "simple list of days")
+    }
+    
     func testPerformanceExample() {
         // This is an example of a performance test case.
         self.measureBlock() {
