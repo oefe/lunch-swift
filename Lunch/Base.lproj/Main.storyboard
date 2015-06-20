@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -16,8 +17,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="bFb-Ih-58U">
-                                <rect key="frame" x="0.0" y="20" width="320" height="568"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NyZ-Ky-b1A">
+                                <rect key="frame" x="16" y="530" width="294" height="30"/>
+                                <state key="normal" title="&lt;action&gt;">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="sendOrder:" destination="BYZ-38-t0r" eventType="touchUpInside" id="g9P-i6-ynf"/>
+                                </connections>
+                            </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="36" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="bFb-Ih-58U">
+                                <rect key="frame" x="0.0" y="20" width="320" height="500"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="switchCell" id="rGU-qS-keq" customClass="SwitchTableViewCell" customModule="Lunch" customModuleProvider="target">
@@ -46,10 +56,27 @@
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="NyZ-Ky-b1A" firstAttribute="top" secondItem="bFb-Ih-58U" secondAttribute="bottom" constant="10" id="CRi-P9-m6t"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="NyZ-Ky-b1A" secondAttribute="trailing" constant="-6" id="FVM-MZ-ZlC"/>
+                            <constraint firstItem="NyZ-Ky-b1A" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="Fcr-bq-M7O"/>
+                            <constraint firstAttribute="centerX" secondItem="NyZ-Ky-b1A" secondAttribute="centerX" constant="-3" id="aNA-cF-CyS"/>
+                            <constraint firstItem="bFb-Ih-58U" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="gIg-RD-mBr"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="bFb-Ih-58U" secondAttribute="trailing" constant="-16" id="lOh-fN-I4e"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="NyZ-Ky-b1A" secondAttribute="bottom" constant="8" id="qy1-HI-IMk"/>
+                            <constraint firstItem="bFb-Ih-58U" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-16" id="tLX-8a-4Lp"/>
+                            <constraint firstItem="NyZ-Ky-b1A" firstAttribute="top" secondItem="bFb-Ih-58U" secondAttribute="bottom" constant="10" id="zr7-NV-7ap"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="zr7-NV-7ap"/>
+                            </mask>
+                        </variation>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="320" height="568"/>
                     <connections>
+                        <outlet property="sendButton" destination="NyZ-Ky-b1A" id="cLX-9Z-8N7"/>
                         <outlet property="tableView" destination="bFb-Ih-58U" id="kyk-VN-hV2"/>
                     </connections>
                 </viewController>

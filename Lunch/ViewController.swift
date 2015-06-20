@@ -12,12 +12,17 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
     @IBOutlet
     var tableView: UITableView!
+    
+    @IBOutlet
+    var sendButton: UIButton!
+    
     var order = Order(today: NSDate())
     
     override func viewDidLoad() {
         super.viewDidLoad()
         //self.tableView.registerClass(SwitchTableViewCell.self, forCellReuseIdentifier: "switchCell")
         loadOrder()
+        updateSendButtonLabel()
     }
 
     override func didReceiveMemoryWarning() {
@@ -56,6 +61,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         saveOrder()
     }
     
+    @IBAction
+    func sendOrder(sender: UIButton) {
+        order.alreadyOrdered = !order.alreadyOrdered
+        saveOrder()
+        tableView.reloadData()
+        updateSendButtonLabel()
+    }
+    
     private func saveOrder() {
         let json = order.asJsonObject()
         var error: NSErrorPointer = nil
@@ -78,6 +91,16 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         var error: NSErrorPointer = nil
         let url = fm.URLForDirectory(NSSearchPathDirectory.ApplicationSupportDirectory, inDomain: NSSearchPathDomainMask.UserDomainMask, appropriateForURL: nil, create: false, error: error)
         return url!
+    }
+    
+    private func updateSendButtonLabel() {
+        let label: String
+        if (order.alreadyOrdered) {
+            label = "Rückgängig"
+        } else {
+            label = "Abschicken"
+        }
+        sendButton.setTitle(label, forState: UIControlState.Normal)
     }
 }
 
