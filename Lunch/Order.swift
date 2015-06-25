@@ -63,11 +63,9 @@ class Order {
     
     func orderedDays() -> String {
         let days = map (filter (enumerate(next), {
-                (i: Int, ordered: Bool) -> Bool in
-                return ordered
+                (_, ordered) in ordered
             }), {
-                (day: Int, _) -> String in
-                return self.formatWeek(1, day: day, withFormat: "EEEE")
+                (day, _) in self.formatWeek(1, day: day, withFormat: "EEEE")
             })
         
         switch days.count {
