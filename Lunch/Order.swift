@@ -55,32 +55,23 @@ class Order {
     
     func weekLabel(week: Int) -> String {
         let date = today.dateByAddingTimeInterval(Double(week) * Order.oneWeek)
-        let formatter = NSDateFormatter()
-        formatter.dateFormat = "'KW' w"
-        formatter.locale = Order.locale
-        return formatter.stringFromDate(date)
+        return formatDate(date, withFormat: "'KW' w")
     }
     
     func dayLabel(#week: Int, day: Int) -> String {
         let monday = mondayBeforeOrAt(today)
         let date = monday.dateByAddingTimeInterval(Double(week) * Order.oneWeek + Double(day) * Order.oneDay)
-        let formatter = NSDateFormatter()
-        formatter.dateFormat = "EEEE, d.M."
-        formatter.locale = Order.locale
-        return formatter.stringFromDate(date)
+        return formatDate(date, withFormat: "EEEE, d.M.")
     }
     
     func orderedDays() -> String {
         let monday = mondayBeforeOrAt(today)
-        let formatter = NSDateFormatter()
-        formatter.dateFormat = "EEEE"
-        formatter.locale = Order.locale
         
         var days: [String] = []
         for i in 0...4 {
             if next[i] {
                 let date = monday.dateByAddingTimeInterval(Order.oneWeek + Double(i) * Order.oneDay)
-                days.append(formatter.stringFromDate(date))
+                days.append(formatDate(date, withFormat: "EEEE"))
             }
         }
         switch days.count {
@@ -103,17 +94,19 @@ class Order {
     // Helper functions
     private func jsonKey(weeksForward: Double) -> String{
         let date = today.dateByAddingTimeInterval(weeksForward * Order.oneWeek)
+        return formatDate(date, withFormat: "YYYY-ww")
+    }
+    
+    private func mondayBeforeOrAt(date: NSDate) -> NSDate {
+        let dayNo = formatDate(date, withFormat: "e").toInt()!
+        return today.dateByAddingTimeInterval(-Order.oneDay * Double(dayNo - 1))
+    }
+    
+    private func formatDate(date: NSDate, withFormat: String) -> String{
         let formatter = NSDateFormatter()
-        formatter.dateFormat = "YYYY-ww"
+        formatter.dateFormat = withFormat
         formatter.locale = Order.locale
         return formatter.stringFromDate(date)
     }
     
-    private func mondayBeforeOrAt(date: NSDate) -> NSDate {
-        let formatter = NSDateFormatter()
-        formatter.dateFormat = "e"
-        formatter.locale = Order.locale
-        let dayNo = formatter.stringFromDate(date).toInt()!
-        return today.dateByAddingTimeInterval(-Order.oneDay * Double(dayNo - 1))
-    }
 }
