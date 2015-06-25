@@ -12,14 +12,14 @@ class Order {
     var current = [false, false, false, false, false]
     var next = [false, false, false, false, false]
     var alreadyOrdered = false
-    let today: NSDate
+    let monday: NSDate
     
     init(today: NSDate) {
-        self.today = today
+        self.monday = Order.mondayBeforeOrAt(today)
     }
     
     init(today: NSDate, withJsonObject json: NSDictionary) {
-        self.today = today
+        self.monday = Order.mondayBeforeOrAt(today)
         if let thisWeek = json[jsonKey(0)] as? NSDictionary {
             current = thisWeek[Order.ordersJsonKey] as! [Bool]
         }
@@ -54,24 +54,21 @@ class Order {
     }
     
     func weekLabel(week: Int) -> String {
-        let date = today.dateByAddingTimeInterval(Double(week) * Order.oneWeek)
-        return formatDate(date, withFormat: "'KW' w")
+        let date = monday.dateByAddingTimeInterval(Double(week) * Order.oneWeek)
+        return Order.formatDate(date, withFormat: "'KW' w")
     }
     
     func dayLabel(#week: Int, day: Int) -> String {
-        let monday = mondayBeforeOrAt(today)
         let date = monday.dateByAddingTimeInterval(Double(week) * Order.oneWeek + Double(day) * Order.oneDay)
-        return formatDate(date, withFormat: "EEEE, d.M.")
+        return Order.formatDate(date, withFormat: "EEEE, d.M.")
     }
     
     func orderedDays() -> String {
-        let monday = mondayBeforeOrAt(today)
-        
         var days: [String] = []
         for i in 0...4 {
             if next[i] {
                 let date = monday.dateByAddingTimeInterval(Order.oneWeek + Double(i) * Order.oneDay)
-                days.append(formatDate(date, withFormat: "EEEE"))
+                days.append(Order.formatDate(date, withFormat: "EEEE"))
             }
         }
         switch days.count {
@@ -93,16 +90,16 @@ class Order {
     
     // Helper functions
     private func jsonKey(weeksForward: Double) -> String{
-        let date = today.dateByAddingTimeInterval(weeksForward * Order.oneWeek)
-        return formatDate(date, withFormat: "YYYY-ww")
+        let date = monday.dateByAddingTimeInterval(weeksForward * Order.oneWeek)
+        return Order.formatDate(date, withFormat: "YYYY-ww")
     }
     
-    private func mondayBeforeOrAt(date: NSDate) -> NSDate {
-        let dayNo = formatDate(date, withFormat: "e").toInt()!
-        return today.dateByAddingTimeInterval(-Order.oneDay * Double(dayNo - 1))
+    static private func mondayBeforeOrAt(date: NSDate) -> NSDate {
+        let dayNo = Order.formatDate(date, withFormat: "e").toInt()!
+        return date.dateByAddingTimeInterval(-Order.oneDay * Double(dayNo - 1))
     }
     
-    private func formatDate(date: NSDate, withFormat: String) -> String{
+    static private func formatDate(date: NSDate, withFormat: String) -> String{
         let formatter = NSDateFormatter()
         formatter.dateFormat = withFormat
         formatter.locale = Order.locale
