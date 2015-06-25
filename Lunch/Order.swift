@@ -54,13 +54,11 @@ class Order {
     }
     
     func weekLabel(week: Int) -> String {
-        let date = monday.dateByAddingTimeInterval(Double(week) * Order.oneWeek)
-        return Order.formatDate(date, withFormat: "'KW' w")
+        return formatWeek(week, withFormat: "'KW' w")
     }
     
     func dayLabel(#week: Int, day: Int) -> String {
-        let date = monday.dateByAddingTimeInterval(Double(week) * Order.oneWeek + Double(day) * Order.oneDay)
-        return Order.formatDate(date, withFormat: "EEEE, d.M.")
+        return formatWeek(week, day: day, withFormat: "EEEE, d.M.")
     }
     
     func orderedDays() -> String {
@@ -89,14 +87,18 @@ class Order {
     private static let locale = NSLocale(localeIdentifier: "de")
     
     // Helper functions
-    private func jsonKey(weeksForward: Double) -> String{
-        let date = monday.dateByAddingTimeInterval(weeksForward * Order.oneWeek)
-        return Order.formatDate(date, withFormat: "YYYY-ww")
+    private func jsonKey(weeksForward: Int) -> String{
+        return formatWeek(weeksForward, withFormat: "YYYY-ww")
     }
     
     static private func mondayBeforeOrAt(date: NSDate) -> NSDate {
         let dayNo = Order.formatDate(date, withFormat: "e").toInt()!
         return date.dateByAddingTimeInterval(-Order.oneDay * Double(dayNo - 1))
+    }
+    
+    func formatWeek(week: Int, day: Int=0, withFormat: String) -> String {
+        let date = monday.dateByAddingTimeInterval(Double(week) * Order.oneWeek + Double(day) * Order.oneDay)
+        return Order.formatDate(date, withFormat: withFormat)
     }
     
     static private func formatDate(date: NSDate, withFormat: String) -> String{
