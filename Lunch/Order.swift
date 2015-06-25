@@ -62,12 +62,14 @@ class Order {
     }
     
     func orderedDays() -> String {
-        var days: [String] = []
-        for i in 0...4 {
-            if next[i] {
-                days.append(formatWeek(1, day: i, withFormat: "EEEE"))
-            }
-        }
+        let days = map (filter (enumerate(next), {
+                (i: Int, ordered: Bool) -> Bool in
+                return ordered
+            }), {
+                (day: Int, _) -> String in
+                return self.formatWeek(1, day: day, withFormat: "EEEE")
+            })
+        
         switch days.count {
         case 0:
             return "nichts"
