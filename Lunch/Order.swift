@@ -65,8 +65,7 @@ class Order {
         var days: [String] = []
         for i in 0...4 {
             if next[i] {
-                let date = monday.dateByAddingTimeInterval(Order.oneWeek + Double(i) * Order.oneDay)
-                days.append(Order.formatDate(date, withFormat: "EEEE"))
+                days.append(formatWeek(1, day: i, withFormat: "EEEE"))
             }
         }
         switch days.count {
