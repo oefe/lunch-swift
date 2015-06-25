@@ -42,12 +42,12 @@ class Order {
         ]
     }
     
-    func valueForWeekIndex(weekIndex: Int, dayIndex: Int) -> Bool {
-        switch weekIndex {
+    func valueForWeek(week: Int, day: Int) -> Bool {
+        switch week {
         case 0:
-            return current[dayIndex]
+            return current[day]
         case 1:
-            return next[dayIndex]
+            return next[day]
         default:
             return false
         }
@@ -87,8 +87,8 @@ class Order {
     private static let locale = NSLocale(localeIdentifier: "de")
     
     // Helper functions
-    private func jsonKey(weeksForward: Int) -> String{
-        return formatWeek(weeksForward, withFormat: "YYYY-ww")
+    private func jsonKey(week: Int) -> String{
+        return formatWeek(week, withFormat: "YYYY-ww")
     }
     
     static private func mondayBeforeOrAt(date: NSDate) -> NSDate {

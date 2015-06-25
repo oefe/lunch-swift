@@ -48,7 +48,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         cell.textLabel?.text = order.dayLabel(week: indexPath.section, day: indexPath.row)
         
-        cell.toggle.on = order.valueForWeekIndex(indexPath.section, dayIndex: indexPath.row)
+        cell.toggle.on = order.valueForWeek(indexPath.section, day: indexPath.row)
         cell.toggle.enabled = indexPath.section > 0 && !order.alreadyOrdered
         cell.toggle.tag = indexPath.row
         
