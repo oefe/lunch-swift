@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5B362FF71B3DEB6F007A0C23 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B362FF61B3DEB6F007A0C23 /* NotificationCenter.framework */; };
+		5B362FFC1B3DEB6F007A0C23 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B362FFB1B3DEB6F007A0C23 /* TodayViewController.swift */; };
+		5B362FFE1B3DEB6F007A0C23 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5B362FFD1B3DEB6F007A0C23 /* MainInterface.storyboard */; };
+		5B3630011B3DEB6F007A0C23 /* TodayWidget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 5B362FF41B3DEB6F007A0C23 /* TodayWidget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		5B7884251B2E0E4500B4358E /* SwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7884241B2E0E4500B4358E /* SwitchTableViewCell.swift */; };
 		5BF1126C1B2DF3D8002CE228 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF1126B1B2DF3D8002CE228 /* AppDelegate.swift */; };
 		5BF1126E1B2DF3D8002CE228 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF1126D1B2DF3D8002CE228 /* ViewController.swift */; };
@@ -19,6 +23,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		5B362FFF1B3DEB6F007A0C23 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5BF1125E1B2DF3D8002CE228 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5B362FF31B3DEB6F007A0C23;
+			remoteInfo = TodayWidget;
+		};
 		5BF1127C1B2DF3D9002CE228 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 5BF1125E1B2DF3D8002CE228 /* Project object */;
@@ -28,7 +39,26 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		5B3630051B3DEB6F007A0C23 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				5B3630011B3DEB6F007A0C23 /* TodayWidget.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		5B362FF41B3DEB6F007A0C23 /* TodayWidget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = TodayWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		5B362FF61B3DEB6F007A0C23 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
+		5B362FFA1B3DEB6F007A0C23 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5B362FFB1B3DEB6F007A0C23 /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
+		5B362FFD1B3DEB6F007A0C23 /* MainInterface.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MainInterface.storyboard; sourceTree = "<group>"; };
 		5B7884241B2E0E4500B4358E /* SwitchTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitchTableViewCell.swift; sourceTree = "<group>"; };
 		5B7F94E41B36039700833189 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = SOURCE_ROOT; };
 		5B7F94E51B36039700833189 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
@@ -46,6 +76,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		5B362FF11B3DEB6F007A0C23 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5B362FF71B3DEB6F007A0C23 /* NotificationCenter.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5BF112631B2DF3D8002CE228 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -63,6 +101,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5B362FF51B3DEB6F007A0C23 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5B362FF61B3DEB6F007A0C23 /* NotificationCenter.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		5B362FF81B3DEB6F007A0C23 /* TodayWidget */ = {
+			isa = PBXGroup;
+			children = (
+				5B362FFB1B3DEB6F007A0C23 /* TodayViewController.swift */,
+				5B362FFD1B3DEB6F007A0C23 /* MainInterface.storyboard */,
+				5B362FF91B3DEB6F007A0C23 /* Supporting Files */,
+			);
+			path = TodayWidget;
+			sourceTree = "<group>";
+		};
+		5B362FF91B3DEB6F007A0C23 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				5B362FFA1B3DEB6F007A0C23 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		5B7F94E61B3603C000833189 /* Documentation */ = {
 			isa = PBXGroup;
 			children = (
@@ -79,6 +143,8 @@
 				5BF112681B2DF3D8002CE228 /* Lunch */,
 				5BF1127E1B2DF3D9002CE228 /* LunchTests */,
 				5B7F94E61B3603C000833189 /* Documentation */,
+				5B362FF81B3DEB6F007A0C23 /* TodayWidget */,
+				5B362FF51B3DEB6F007A0C23 /* Frameworks */,
 				5BF112671B2DF3D8002CE228 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -88,6 +154,7 @@
 			children = (
 				5BF112661B2DF3D8002CE228 /* Lunch.app */,
 				5BF1127B1B2DF3D9002CE228 /* LunchTests.xctest */,
+				5B362FF41B3DEB6F007A0C23 /* TodayWidget.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -135,6 +202,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		5B362FF31B3DEB6F007A0C23 /* TodayWidget */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5B3630021B3DEB6F007A0C23 /* Build configuration list for PBXNativeTarget "TodayWidget" */;
+			buildPhases = (
+				5B362FF01B3DEB6F007A0C23 /* Sources */,
+				5B362FF11B3DEB6F007A0C23 /* Frameworks */,
+				5B362FF21B3DEB6F007A0C23 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TodayWidget;
+			productName = TodayWidget;
+			productReference = 5B362FF41B3DEB6F007A0C23 /* TodayWidget.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		5BF112651B2DF3D8002CE228 /* Lunch */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5BF112851B2DF3D9002CE228 /* Build configuration list for PBXNativeTarget "Lunch" */;
@@ -142,10 +226,12 @@
 				5BF112621B2DF3D8002CE228 /* Sources */,
 				5BF112631B2DF3D8002CE228 /* Frameworks */,
 				5BF112641B2DF3D8002CE228 /* Resources */,
+				5B3630051B3DEB6F007A0C23 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				5B3630001B3DEB6F007A0C23 /* PBXTargetDependency */,
 			);
 			name = Lunch;
 			productName = Lunch;
@@ -179,6 +265,9 @@
 				LastUpgradeCheck = 0630;
 				ORGANIZATIONNAME = "Martina Oefelein";
 				TargetAttributes = {
+					5B362FF31B3DEB6F007A0C23 = {
+						CreatedOnToolsVersion = 6.3.2;
+					};
 					5BF112651B2DF3D8002CE228 = {
 						CreatedOnToolsVersion = 6.3.2;
 					};
@@ -203,11 +292,20 @@
 			targets = (
 				5BF112651B2DF3D8002CE228 /* Lunch */,
 				5BF1127A1B2DF3D9002CE228 /* LunchTests */,
+				5B362FF31B3DEB6F007A0C23 /* TodayWidget */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		5B362FF21B3DEB6F007A0C23 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5B362FFE1B3DEB6F007A0C23 /* MainInterface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5BF112641B2DF3D8002CE228 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -228,6 +326,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		5B362FF01B3DEB6F007A0C23 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5B362FFC1B3DEB6F007A0C23 /* TodayViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5BF112621B2DF3D8002CE228 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -251,6 +357,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		5B3630001B3DEB6F007A0C23 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5B362FF31B3DEB6F007A0C23 /* TodayWidget */;
+			targetProxy = 5B362FFF1B3DEB6F007A0C23 /* PBXContainerItemProxy */;
+		};
 		5BF1127D1B2DF3D9002CE228 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 5BF112651B2DF3D8002CE228 /* Lunch */;
@@ -278,6 +389,30 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		5B3630031B3DEB6F007A0C23 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = TodayWidget/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		5B3630041B3DEB6F007A0C23 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = TodayWidget/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
 		5BF112831B2DF3D9002CE228 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -418,6 +553,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		5B3630021B3DEB6F007A0C23 /* Build configuration list for PBXNativeTarget "TodayWidget" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5B3630031B3DEB6F007A0C23 /* Debug */,
+				5B3630041B3DEB6F007A0C23 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		5BF112611B2DF3D8002CE228 /* Build configuration list for PBXProject "Lunch" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
