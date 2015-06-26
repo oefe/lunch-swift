@@ -1,0 +1,13 @@
+# .gitignore
+#
+# There may more patterns to exclude, see e.g.:
+#
+# https://github.com/github/gitignore/blob/master/Swift.gitignore
+# http://stackoverflow.com/questions/18939421/what-should-xcode-6-gitignore-file-include?lq=1
+# However, for now, I'm only excluding files that I'm actually seeing in my repo
+#
+# Some of the patterns mentioned in the references above are actually in my
+# ~/.config/git/ignore file (created by the GitHub App)
+
+xcuserdata
+*.xccheckout
