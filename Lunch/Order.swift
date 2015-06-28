@@ -12,14 +12,17 @@ class Order {
     var current = [false, false, false, false, false]
     var next = [false, false, false, false, false]
     var alreadyOrdered = false
+    let today: Int
     let monday: NSDate
     
     init(today: NSDate) {
-        self.monday = Order.mondayBeforeOrAt(today)
+        self.today = Order.weekDayForDate(today)
+        self.monday = today.dateByAddingTimeInterval(-Order.oneDay * Double(self.today))
     }
     
     init(today: NSDate, withJsonObject json: NSDictionary) {
-        self.monday = Order.mondayBeforeOrAt(today)
+        self.today = Order.weekDayForDate(today)
+        self.monday = today.dateByAddingTimeInterval(-Order.oneDay * Double(self.today))
         if let thisWeek = json[jsonKey(0)] as? NSDictionary {
             current = thisWeek[Order.ordersJsonKey] as! [Bool]
         }
@@ -90,9 +93,8 @@ class Order {
         return formatWeek(week, withFormat: "YYYY-ww")
     }
     
-    static private func mondayBeforeOrAt(date: NSDate) -> NSDate {
-        let dayNo = Order.formatDate(date, withFormat: "e").toInt()!
-        return date.dateByAddingTimeInterval(-Order.oneDay * Double(dayNo - 1))
+    static private func weekDayForDate(date: NSDate) -> Int {
+        return Order.formatDate(date, withFormat: "e").toInt()! - 1
     }
     
     func formatWeek(week: Int, day: Int=0, withFormat: String) -> String {
