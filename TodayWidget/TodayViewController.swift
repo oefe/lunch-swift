@@ -10,10 +10,16 @@ import UIKit
 import NotificationCenter
 
 class TodayViewController: UIViewController, NCWidgetProviding {
+    
+    @IBOutlet
+    var label: UILabel!
+    
+    var order = Order(today: NSDate())
         
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view from its nib.
+        order = loadOrder() ?? order
     }
     
     override func didReceiveMemoryWarning() {
@@ -22,11 +28,13 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     }
     
     func widgetPerformUpdateWithCompletionHandler(completionHandler: ((NCUpdateResult) -> Void)!) {
-        // Perform any setup necessary in order to update the view.
-
-        // If an error is encountered, use NCUpdateResult.Failed
-        // If there's no update required, use NCUpdateResult.NoData
-        // If there's an update, use NCUpdateResult.NewData
+        if (order.today >= 5) {
+            label.text = "Wochenende"
+        } else if order.current [order.today] {
+            label.text = "Heute Kantine"
+        } else {
+            label.text = "Nix Kantine heute"
+        }
 
         completionHandler(NCUpdateResult.NewData)
     }
