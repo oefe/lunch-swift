@@ -22,7 +22,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     override func viewDidLoad() {
         super.viewDidLoad()
         //self.tableView.registerClass(SwitchTableViewCell.self, forCellReuseIdentifier: "switchCell")
-        loadOrder()
+        order = loadOrder() ?? order
         updateSendButtonLabel()
     }
 
@@ -59,7 +59,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func valueChanged(sender: UISwitch) {
         println("Changing day \(sender.tag) to \(sender.on)")
         order.next[sender.tag] = sender.on
-        saveOrder()
+        saveOrder(order)
     }
     
     @IBAction
@@ -68,33 +68,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             sendEmail()
         }
         order.alreadyOrdered = !order.alreadyOrdered
-        saveOrder()
+        saveOrder(order)
         tableView.reloadData()
         updateSendButtonLabel()
-    }
-    
-    private func saveOrder() {
-        let json = order.asJsonObject()
-        var error: NSErrorPointer = nil
-        if let data = NSJSONSerialization.dataWithJSONObject(json, options: NSJSONWritingOptions.PrettyPrinted, error: error) {
-            data.writeToURL(dataFileUrl(), atomically: true)
-        }
-    }
-    
-    private func loadOrder() {
-        var error: NSErrorPointer = nil
-        if let data = NSData(contentsOfURL:dataFileUrl()) {
-            if let json = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: error) as? NSDictionary {
-                order = Order(today: NSDate(), withJsonObject: json)
-            }
-        }
-    }
-    
-    private func dataFileUrl() -> NSURL {
-        let fm = NSFileManager()
-        var error: NSErrorPointer = nil
-        let url = fm.URLForDirectory(NSSearchPathDirectory.ApplicationSupportDirectory, inDomain: NSSearchPathDomainMask.UserDomainMask, appropriateForURL: nil, create: false, error: error)
-        return url!
     }
     
     private func updateSendButtonLabel() {
