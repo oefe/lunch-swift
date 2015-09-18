@@ -44,14 +44,16 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = self.tableView.dequeueReusableCellWithIdentifier("switchCell") as! SwitchTableViewCell
+        let cell = self.tableView.dequeueReusableCellWithIdentifier("switchCell")!
         
         cell.textLabel?.text = order.dayLabel(week: indexPath.section, day: indexPath.row)
+        let toggle = UISwitch()
         
-        cell.toggle.on = order.valueForWeek(indexPath.section, day: indexPath.row)
-        cell.toggle.enabled = indexPath.section > 0 && !order.alreadyOrdered
-        cell.toggle.tag = indexPath.row
-        
+        toggle.on = order.valueForWeek(indexPath.section, day: indexPath.row)
+        toggle.enabled = indexPath.section > 0 && !order.alreadyOrdered
+        toggle.tag = indexPath.row
+        toggle.addTarget(self, action: "valueChanged:", forControlEvents: UIControlEvents.ValueChanged)
+        cell.accessoryView = toggle
         return cell
     }
     
