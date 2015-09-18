@@ -44,20 +44,22 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell = self.tableView.dequeueReusableCellWithIdentifier("switchCell") as! SwitchTableViewCell
+        let cell = self.tableView.dequeueReusableCellWithIdentifier("switchCell")!
         
         cell.textLabel?.text = order.dayLabel(week: indexPath.section, day: indexPath.row)
+        let toggle = UISwitch()
         
-        cell.toggle.on = order.valueForWeek(indexPath.section, day: indexPath.row)
-        cell.toggle.enabled = indexPath.section > 0 && !order.alreadyOrdered
-        cell.toggle.tag = indexPath.row
-        
+        toggle.on = order.valueForWeek(indexPath.section, day: indexPath.row)
+        toggle.enabled = indexPath.section > 0 && !order.alreadyOrdered
+        toggle.tag = indexPath.row
+        toggle.addTarget(self, action: "valueChanged:", forControlEvents: UIControlEvents.ValueChanged)
+        cell.accessoryView = toggle
         return cell
     }
     
     @IBAction
     func valueChanged(sender: UISwitch) {
-        println("Changing day \(sender.tag) to \(sender.on)")
+        print("Changing day \(sender.tag) to \(sender.on)")
         order.next[sender.tag] = sender.on
         saveOrder()
     }
@@ -75,25 +77,37 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     private func saveOrder() {
         let json = order.asJsonObject()
-        var error: NSErrorPointer = nil
-        if let data = NSJSONSerialization.dataWithJSONObject(json, options: NSJSONWritingOptions.PrettyPrinted, error: error) {
+        let error: NSErrorPointer = nil
+        do {
+            let data = try NSJSONSerialization.dataWithJSONObject(json, options: NSJSONWritingOptions.PrettyPrinted)
             data.writeToURL(dataFileUrl(), atomically: true)
+        } catch let error1 as NSError {
+            error.memory = error1
         }
     }
     
     private func loadOrder() {
-        var error: NSErrorPointer = nil
         if let data = NSData(contentsOfURL:dataFileUrl()) {
-            if let json = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: error) as? NSDictionary {
-                order = Order(today: NSDate(), withJsonObject: json)
+            do {
+                if let json = try NSJSONSerialization.JSONObjectWithData(data, options: []) as? NSDictionary {
+                    order = Order(today: NSDate(), withJsonObject: json)
+                }
+            } catch let error as NSError {
+                // todo: error handling
             }
         }
     }
     
     private func dataFileUrl() -> NSURL {
         let fm = NSFileManager()
-        var error: NSErrorPointer = nil
-        let url = fm.URLForDirectory(NSSearchPathDirectory.ApplicationSupportDirectory, inDomain: NSSearchPathDomainMask.UserDomainMask, appropriateForURL: nil, create: false, error: error)
+        let error: NSErrorPointer = nil
+        let url: NSURL?
+        do {
+            url = try fm.URLForDirectory(NSSearchPathDirectory.ApplicationSupportDirectory, inDomain: NSSearchPathDomainMask.UserDomainMask, appropriateForURL: nil, create: false)
+        } catch let error1 as NSError {
+            error.memory = error1
+            url = nil
+        }
         return url!
     }
     
@@ -109,7 +123,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     private func sendEmail() {
         if !MFMailComposeViewController.canSendMail() {
-            println("Cannot send email, sorry!")
+            print("Cannot send email, sorry!")
             return
         }
         let mailer = MFMailComposeViewController()
@@ -121,7 +135,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         presentViewController(mailer, animated: true, completion: nil)
     }
     
-    func mailComposeController(controller: MFMailComposeViewController!, didFinishWithResult result: MFMailComposeResult, error: NSError!) {
+    func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
         controller.dismissViewControllerAnimated(true, completion: nil)
     }
 }
