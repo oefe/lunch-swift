@@ -57,14 +57,14 @@ class Order {
         return formatWeek(week, withFormat: "'KW' w")
     }
     
-    func dayLabel(#week: Int, day: Int) -> String {
+    func dayLabel(week week: Int, day: Int) -> String {
         return formatWeek(week, day: day, withFormat: "EEEE, d.M.")
     }
     
     func orderedDays() -> String {
-        let days = map (filter (enumerate(next), {
+        let days = next.enumerate().filter ({
                 (_, ordered) in ordered
-            }), {
+            }).map ({
                 (day, _) in self.formatWeek(1, day: day, withFormat: "EEEE")
             })
         
@@ -74,7 +74,7 @@ class Order {
         case 5:
             return "jeden Tag"
         default:
-            return ", ".join(days)
+            return days.joinWithSeparator(", ")
         }
     }
     
@@ -91,7 +91,7 @@ class Order {
     }
     
     static private func mondayBeforeOrAt(date: NSDate) -> NSDate {
-        let dayNo = Order.formatDate(date, withFormat: "e").toInt()!
+        let dayNo = Int(Order.formatDate(date, withFormat: "e"))!
         return date.dateByAddingTimeInterval(-Order.oneDay * Double(dayNo - 1))
     }
     
