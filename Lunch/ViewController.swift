@@ -85,10 +85,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     private func loadOrder() {
-        var error: NSErrorPointer = nil
         if let data = NSData(contentsOfURL:dataFileUrl()) {
-            if let json = NSJSONSerialization.JSONObjectWithData(data, options: []) as? NSDictionary {
-                order = Order(today: NSDate(), withJsonObject: json)
+            do {
+                if let json = try NSJSONSerialization.JSONObjectWithData(data, options: []) as? NSDictionary {
+                    order = Order(today: NSDate(), withJsonObject: json)
+                }
+            } catch let error as NSError {
+                // todo: error handling
             }
         }
     }
