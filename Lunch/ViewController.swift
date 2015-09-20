@@ -86,14 +86,16 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     private func loadOrder() {
-        if let data = NSData(contentsOfURL:dataFileUrl()) {
-            do {
-                if let json = try NSJSONSerialization.JSONObjectWithData(data, options: []) as? NSDictionary {
-                    order = Order(today: NSDate(), withJsonObject: json)
-                }
-            } catch let error as NSError {
-                print("loadOrder: error\(error)")
+        guard let data = NSData(contentsOfURL:dataFileUrl()) else {
+            print("no data")
+            return
+        }
+        do {
+            if let json = try NSJSONSerialization.JSONObjectWithData(data, options: []) as? NSDictionary {
+                order = Order(today: NSDate(), withJsonObject: json)
             }
+        } catch let error as NSError {
+            print("loadOrder: error\(error)")
         }
     }
     
@@ -120,7 +122,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     private func sendEmail() {
-        if !MFMailComposeViewController.canSendMail() {
+        guard MFMailComposeViewController.canSendMail() else {
             print("Cannot send email, sorry!")
             return
         }
