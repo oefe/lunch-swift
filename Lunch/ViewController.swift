@@ -77,12 +77,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     private func saveOrder() {
         let json = order.asJsonObject()
-        let error: NSErrorPointer = nil
         do {
             let data = try NSJSONSerialization.dataWithJSONObject(json, options: NSJSONWritingOptions.PrettyPrinted)
             data.writeToURL(dataFileUrl(), atomically: true)
-        } catch let error1 as NSError {
-            error.memory = error1
+        } catch let error as NSError {
+            print("saveOrder: error\(error)")
         }
     }
     
@@ -93,22 +92,21 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                     order = Order(today: NSDate(), withJsonObject: json)
                 }
             } catch let error as NSError {
-                // todo: error handling
+                print("loadOrder: error\(error)")
             }
         }
     }
     
     private func dataFileUrl() -> NSURL {
         let fm = NSFileManager()
-        let error: NSErrorPointer = nil
         let url: NSURL?
         do {
             url = try fm.URLForDirectory(NSSearchPathDirectory.ApplicationSupportDirectory, inDomain: NSSearchPathDomainMask.UserDomainMask, appropriateForURL: nil, create: false)
-        } catch let error1 as NSError {
-            error.memory = error1
+        } catch let error as NSError {
+            print("dataFileUrl: error\(error)")
             url = nil
         }
-        return url!
+        return NSURL(string: "orders.json", relativeToURL: url)!
     }
     
     private func updateSendButtonLabel() {
