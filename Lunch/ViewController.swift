@@ -129,7 +129,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let mailer = MFMailComposeViewController()
         mailer.mailComposeDelegate = self
         mailer.setToRecipients(["example@example.com"])
-        mailer.setSubject("Essen \(order.weekLabel(0))")
+        mailer.setSubject("Essen \(order.weekLabel(1))")
         let body = "Hallo Schatz,\n\nich habe nächste Woche \(order.orderedDays()) bestellt.\n\nciao\nMartina\n💕"
         mailer.setMessageBody(body, isHTML: false)
         presentViewController(mailer, animated: true, completion: nil)
