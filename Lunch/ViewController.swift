@@ -103,7 +103,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let fm = NSFileManager()
         let url: NSURL?
         do {
-            url = try fm.URLForDirectory(NSSearchPathDirectory.ApplicationSupportDirectory, inDomain: NSSearchPathDomainMask.UserDomainMask, appropriateForURL: nil, create: false)
+            url = try fm.URLForDirectory(NSSearchPathDirectory.ApplicationSupportDirectory, inDomain: NSSearchPathDomainMask.UserDomainMask, appropriateForURL: nil, create: true)
         } catch let error as NSError {
             print("dataFileUrl: error\(error)")
             url = nil
