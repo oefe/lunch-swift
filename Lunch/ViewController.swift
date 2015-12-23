@@ -54,6 +54,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         toggle.tag = indexPath.row
         toggle.addTarget(self, action: "valueChanged:", forControlEvents: UIControlEvents.ValueChanged)
         cell.accessoryView = toggle
+        if indexPath.section == 0 && indexPath.row == order.currentDay {
+            cell.backgroundColor = UIColor (hue: 0.111111, saturation: 0.6, brightness: 1.0, alpha: 1.0)
+        }
         return cell
     }
     

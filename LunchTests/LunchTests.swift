@@ -27,6 +27,7 @@ class LunchTests: XCTestCase {
         XCTAssertEqual(order.alreadyOrdered, false, "not ordered yet")
         XCTAssertEqual(order.current, [false, false, false, false, false], "nothing ordered this week")
         XCTAssertEqual(order.next, [false, false, false, false, false], "nothing ordered next week")
+        XCTAssertEqual(order.currentDay, 2, "17.07.2015 is a Wednesday")
     }
     
     func testSaveLoadSameDay() {
