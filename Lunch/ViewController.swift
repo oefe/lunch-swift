@@ -129,9 +129,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             print("Cannot send email, sorry!")
             return
         }
+        guard let recipient = NSUserDefaults.standardUserDefaults().stringForKey("email") else {
+            print("No email recipient defined")
+            return
+        }
         let mailer = MFMailComposeViewController()
         mailer.mailComposeDelegate = self
-        mailer.setToRecipients(["example@example.com"])
+        mailer.setToRecipients([recipient])
         mailer.setSubject("Essen \(order.weekLabel(1))")
         let body = "Hallo Schatz,\n\nich habe nächste Woche \(order.orderedDays()) bestellt.\n\nciao\nMartina\n💕"
         mailer.setMessageBody(body, isHTML: false)
