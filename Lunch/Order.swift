@@ -14,12 +14,9 @@ class Order {
     var alreadyOrdered = false
     let monday: NSDate
     
-    init(today: NSDate) {
+    init(today: NSDate, withJsonObject json: NSDictionary? = nil) {
         self.monday = Order.mondayBeforeOrAt(today)
-    }
-    
-    init(today: NSDate, withJsonObject json: NSDictionary) {
-        self.monday = Order.mondayBeforeOrAt(today)
+        guard let json = json else {return}
         if let thisWeek = json[jsonKey(0)] as? NSDictionary {
             current = thisWeek[Order.ordersJsonKey] as! [Bool]
         }
