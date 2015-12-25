@@ -139,14 +139,21 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let mailer = MFMailComposeViewController()
         mailer.mailComposeDelegate = self
         mailer.setToRecipients([recipient])
-        mailer.setSubject("Essen \(order.weekLabel(1))")
-        let body = "Hallo Schatz,\n\nich habe nächste Woche \(order.orderedDays()) bestellt.\n\nciao\nMartina\n💕"
+        mailer.setSubject(getDefaultString("subject", replacing:"{WEEK}", with:order.weekLabel(1)))
+        let body = getDefaultString("body", replacing: "{ORDER}", with: order.orderedDays())
         mailer.setMessageBody(body, isHTML: false)
         presentViewController(mailer, animated: true, completion: nil)
     }
     
     func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
         controller.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    private func getDefaultString(key: String, replacing: String, with: String) -> String {
+        guard let template = NSUserDefaults.standardUserDefaults().stringForKey(key) else {
+            return with
+        }
+        return template.stringByReplacingOccurrencesOfString(replacing, withString: with)
     }
     
     private func scheduleNotifications() {

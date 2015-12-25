@@ -8,9 +8,15 @@
 	<array>
 		<dict>
 			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+			<key>Title</key>
+			<string>Email</string>
+		</dict>
+		<dict>
+			<key>Type</key>
 			<string>PSTextFieldSpecifier</string>
 			<key>Title</key>
-			<string>EMail</string>
+			<string>Address</string>
 			<key>Key</key>
 			<string>email</string>
 			<key>DefaultValue</key>
@@ -23,6 +29,31 @@
 			<string>None</string>
 			<key>AutocorrectionType</key>
 			<string>Default</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSTextFieldSpecifier</string>
+			<key>Title</key>
+			<string>Body</string>
+			<key>Key</key>
+			<string>body</string>
+			<key>DefaultValue</key>
+			<string>Hallo Schatz,
+
+ich habe nächste Woche {ORDER}) bestellt.
+ciao
+Martina
+💕</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSTextFieldSpecifier</string>
+			<key>Title</key>
+			<string>Subject</string>
+			<key>Key</key>
+			<string>subject</string>
+			<key>DefaultValue</key>
+			<string>Essen {WEEK}</string>
 		</dict>
 	</array>
 </dict>
