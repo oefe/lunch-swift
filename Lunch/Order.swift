@@ -77,6 +77,21 @@ class Order {
         }
     }
     
+    func events() -> [(when: NSDate, what: String)] {
+        let calendar = NSCalendar.currentCalendar()
+        var result: [(when: NSDate, what: String)] = []
+        for (day, ordered) in next.enumerate() {
+            let date = monday.dateByAddingTimeInterval(Order.oneWeek + Double(day) * Order.oneDay)
+            if ordered {
+                result.append((when: calendar.dateBySettingHour(12, minute: 30, second: 0, ofDate: date, options: .MatchStrictly)!, "Kantine"))
+            } else {
+                result.append((when: calendar.dateBySettingHour(8, minute: 0, second: 0, ofDate: date, options: .MatchStrictly)!, "Essen mitnehmen?"))
+                result.append((when: calendar.dateBySettingHour(12, minute: 15, second: 0, ofDate: date, options: .MatchStrictly)!, "Küche oder ausgehen"))
+            }        
+        }
+        return result
+    }
+    
     // Constants
     private static let oneDay = 24 * 60 * 60.0
     private static let oneWeek = 7 * oneDay

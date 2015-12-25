@@ -42,6 +42,20 @@ class LunchTests: XCTestCase {
         XCTAssertEqual(new.alreadyOrdered, true, "already ordered")
         XCTAssertEqual(new.current, [false, true, false, false, false], "Tuesday ordered this week")
         XCTAssertEqual(new.next, [false, false, true, false, false], "Wednesday ordered next week")
+        
+        let events = new.events()
+        XCTAssertEqual(events.count, 9, "One day ordered: 1x Kantine, 4x Morning, 4x Küche")
+        XCTAssertEqual(events[0].when, DateWithYear(2015, month: 6, day: 29, hour: 8, minute: 0))
+        XCTAssertEqual(events[0].what, "Essen mitnehmen?")
+        XCTAssertEqual(events[1].when, DateWithYear(2015, month: 6, day: 29, hour: 12, minute: 15))
+        XCTAssertEqual(events[1].what, "Küche oder ausgehen")
+        XCTAssertEqual(events[4].when, DateWithYear(2015, month: 7, day: 1, hour: 12, minute: 30))
+        XCTAssertEqual(events[4].what, "Kantine")
+
+    }
+    
+    private func DateWithYear(year: Int, month: Int, day: Int, hour: Int, minute: Int) -> NSDate {
+        return NSCalendar.currentCalendar().dateWithEra(1, year: year, month: month, day: day, hour: hour, minute: minute, second: 0, nanosecond: 0)!
     }
     
     func testSaveLoadSameWeek() {

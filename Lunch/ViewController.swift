@@ -69,8 +69,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     @IBAction
     func sendOrder(sender: UIButton) {
-        if !order.alreadyOrdered {
+        if order.alreadyOrdered {
+            UIApplication.sharedApplication().cancelAllLocalNotifications()
+        } else {
             sendEmail()
+            scheduleNotifications()
         }
         order.alreadyOrdered = !order.alreadyOrdered
         saveOrder()
@@ -144,6 +147,15 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
         controller.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    private func scheduleNotifications() {
+        for (when, what) in order.events() {
+            let n = UILocalNotification()
+            n.alertBody = what
+            n.fireDate = when
+            UIApplication.sharedApplication().scheduleLocalNotification(n)
+        }
     }
 }
 
